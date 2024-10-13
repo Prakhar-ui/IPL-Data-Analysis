@@ -4,8 +4,7 @@ spark
 # COMMAND ----------
 
 from pyspark.sql.types import StructField, StructType, IntegerType, StringType, BooleanType, DateType, DecimalType
-from pyspark.sql.functions import col, to_date, length, row_number
-from pyspark.sql import Window
+from pyspark.sql import Window, functions as F
 
 
 # COMMAND ----------
@@ -27,54 +26,54 @@ ball_by_ball_df_raw.printSchema()
 # COMMAND ----------
 
 ball_by_ball_df = ball_by_ball_df_raw \
-    .withColumn("match_id", col("MatcH_id").cast(IntegerType())) \
-    .withColumn("over_id", col("Over_id").cast(IntegerType())) \
-    .withColumn("ball_id", col("Ball_id").cast(IntegerType())) \
-    .withColumn("innings_no", col("Innings_No").cast(IntegerType())) \
-    .withColumn("team_batting", col("Team_Batting").cast(StringType())) \
-    .withColumn("team_bowling", col("Team_Bowling").cast(StringType())) \
-    .withColumn("striker_batting_position", col("Striker_Batting_Position").cast(IntegerType())) \
-    .withColumn("extra_type", col("Extra_Type").cast(StringType())) \
-    .withColumn("runs_scored", col("Runs_Scored").cast(IntegerType())) \
-    .withColumn("extra_runs", col("Extra_runs").cast(IntegerType())) \
-    .withColumn("wides", col("Wides").cast(IntegerType())) \
-    .withColumn("legbyes", col("Legbyes").cast(IntegerType())) \
-    .withColumn("byes", col("Byes").cast(IntegerType())) \
-    .withColumn("noballs", col("Noballs").cast(IntegerType())) \
-    .withColumn("penalty", col("Penalty").cast(IntegerType())) \
-    .withColumn("bowler_extras", col("Bowler_Extras").cast(IntegerType())) \
-    .withColumn("out_type", col("Out_type").cast(StringType())) \
-    .withColumn("caught", col("Caught").cast(BooleanType())) \
-    .withColumn("bowled", col("Bowled").cast(BooleanType())) \
-    .withColumn("run_out", col("Run_out").cast(BooleanType())) \
-    .withColumn("lbw", col("LBW").cast(BooleanType())) \
-    .withColumn("retired_hurt", col("Retired_hurt").cast(BooleanType())) \
-    .withColumn("stumped", col("Stumped").cast(BooleanType())) \
-    .withColumn("caught_and_bowled", col("caught_and_bowled").cast(BooleanType())) \
-    .withColumn("hit_wicket", col("hit_wicket").cast(BooleanType())) \
-    .withColumn("obstructingfeild", col("ObstructingFeild").cast(BooleanType())) \
-    .withColumn("bowler_wicket", col("Bowler_Wicket").cast(BooleanType())) \
-    .withColumn("match_date", to_date(col("match_date"), "M/d/yyyy")) \
-    .withColumn("season", col("Season").cast(IntegerType())) \
-    .withColumn("striker", col("Striker").cast(IntegerType())) \
-    .withColumn("non_striker", col("Non_Striker").cast(IntegerType())) \
-    .withColumn("bowler", col("Bowler").cast(IntegerType())) \
-    .withColumn("player_out", col("Player_Out").cast(IntegerType())) \
-    .withColumn("fielders", col("Fielders").cast(IntegerType())) \
-    .withColumn("striker_match_sk", col("Striker_match_SK").cast(IntegerType())) \
-    .withColumn("strikersk", col("StrikerSK").cast(IntegerType())) \
-    .withColumn("nonstriker_match_sk", col("NonStriker_match_SK").cast(IntegerType())) \
-    .withColumn("nonstriker_sk", col("NONStriker_SK").cast(IntegerType())) \
-    .withColumn("fielder_match_sk", col("Fielder_match_SK").cast(IntegerType())) \
-    .withColumn("fielder_sk", col("Fielder_SK").cast(IntegerType())) \
-    .withColumn("bowler_match_sk", col("Bowler_match_SK").cast(IntegerType())) \
-    .withColumn("bowler_sk", col("BOWLER_SK").cast(IntegerType())) \
-    .withColumn("playerout_match_sk", col("PlayerOut_match_SK").cast(IntegerType())) \
-    .withColumn("battingteam_sk", col("BattingTeam_SK").cast(IntegerType())) \
-    .withColumn("bowlingteam_sk", col("BowlingTeam_SK").cast(IntegerType())) \
-    .withColumn("keeper_catch", col("Keeper_Catch").cast(BooleanType())) \
-    .withColumn("player_out_sk", col("Player_out_sk").cast(IntegerType())) \
-    .withColumn("matchdatesk", to_date(col("MatchDateSK"), "yyyyMMdd"))
+    .withColumn("match_id", F.col("MatcH_id").cast(IntegerType())) \
+    .withColumn("over_id", F.col("Over_id").cast(IntegerType())) \
+    .withColumn("ball_id", F.col("Ball_id").cast(IntegerType())) \
+    .withColumn("innings_no", F.col("Innings_No").cast(IntegerType())) \
+    .withColumn("team_batting", F.col("Team_Batting").cast(StringType())) \
+    .withColumn("team_bowling", F.col("Team_Bowling").cast(StringType())) \
+    .withColumn("striker_batting_position", F.col("Striker_Batting_Position").cast(IntegerType())) \
+    .withColumn("extra_type", F.col("Extra_Type").cast(StringType())) \
+    .withColumn("runs_scored", F.col("Runs_Scored").cast(IntegerType())) \
+    .withColumn("extra_runs", F.col("Extra_runs").cast(IntegerType())) \
+    .withColumn("wides", F.col("Wides").cast(IntegerType())) \
+    .withColumn("legbyes", F.col("Legbyes").cast(IntegerType())) \
+    .withColumn("byes", F.col("Byes").cast(IntegerType())) \
+    .withColumn("noballs", F.col("Noballs").cast(IntegerType())) \
+    .withColumn("penalty", F.col("Penalty").cast(IntegerType())) \
+    .withColumn("bowler_extras", F.col("Bowler_Extras").cast(IntegerType())) \
+    .withColumn("out_type", F.col("Out_type").cast(StringType())) \
+    .withColumn("caught", F.col("Caught").cast(BooleanType())) \
+    .withColumn("bowled", F.col("Bowled").cast(BooleanType())) \
+    .withColumn("run_out", F.col("Run_out").cast(BooleanType())) \
+    .withColumn("lbw", F.col("LBW").cast(BooleanType())) \
+    .withColumn("retired_hurt", F.col("Retired_hurt").cast(BooleanType())) \
+    .withColumn("stumped", F.col("Stumped").cast(BooleanType())) \
+    .withColumn("caught_and_bowled", F.col("caught_and_bowled").cast(BooleanType())) \
+    .withColumn("hit_wicket", F.col("hit_wicket").cast(BooleanType())) \
+    .withColumn("obstructingfeild", F.col("ObstructingFeild").cast(BooleanType())) \
+    .withColumn("bowler_wicket", F.col("Bowler_Wicket").cast(BooleanType())) \
+    .withColumn("match_date", F.to_date(F.col("match_date"), "M/d/yyyy")) \
+    .withColumn("season", F.col("Season").cast(IntegerType())) \
+    .withColumn("striker", F.col("Striker").cast(IntegerType())) \
+    .withColumn("non_striker", F.col("Non_Striker").cast(IntegerType())) \
+    .withColumn("bowler", F.col("Bowler").cast(IntegerType())) \
+    .withColumn("player_out", F.col("Player_Out").cast(IntegerType())) \
+    .withColumn("fielders", F.col("Fielders").cast(IntegerType())) \
+    .withColumn("striker_match_sk", F.col("Striker_match_SK").cast(IntegerType())) \
+    .withColumn("strikersk", F.col("StrikerSK").cast(IntegerType())) \
+    .withColumn("nonstriker_match_sk", F.col("NonStriker_match_SK").cast(IntegerType())) \
+    .withColumn("nonstriker_sk", F.col("NONStriker_SK").cast(IntegerType())) \
+    .withColumn("fielder_match_sk", F.col("Fielder_match_SK").cast(IntegerType())) \
+    .withColumn("fielder_sk", F.col("Fielder_SK").cast(IntegerType())) \
+    .withColumn("bowler_match_sk", F.col("Bowler_match_SK").cast(IntegerType())) \
+    .withColumn("bowler_sk", F.col("BOWLER_SK").cast(IntegerType())) \
+    .withColumn("playerout_match_sk", F.col("PlayerOut_match_SK").cast(IntegerType())) \
+    .withColumn("battingteam_sk", F.col("BattingTeam_SK").cast(IntegerType())) \
+    .withColumn("bowlingteam_sk", F.col("BowlingTeam_SK").cast(IntegerType())) \
+    .withColumn("keeper_catch", F.col("Keeper_Catch").cast(BooleanType())) \
+    .withColumn("player_out_sk", F.col("Player_out_sk").cast(IntegerType())) \
+    .withColumn("matchdatesk", F.to_date(F.col("MatchDateSK"), "yyyyMMdd"))
 
 # COMMAND ----------
 
@@ -88,13 +87,12 @@ match_df_raw.printSchema()
 # COMMAND ----------
 
 match_df = match_df_raw \
-    .withColumn("match_sk", col("Match_SK").cast(IntegerType())) \
-    .withColumn("match_id", col("match_id").cast(IntegerType())) \
-    .withColumn("match_date", to_date("match_date","M/d/yyyy")) \
-    .withColumn("season_year", col("season_year").cast(IntegerType())) \
-    .withColumn("win_margin", col("win_margin").cast(IntegerType())) \
-    .withColumn("country_id", col("country_id").cast(IntegerType()))
-
+    .withColumn("match_sk", F.col("Match_SK").cast(IntegerType())) \
+    .withColumn("match_id", F.col("match_id").cast(IntegerType())) \
+    .withColumn("match_date", F.to_date("match_date","M/d/yyyy")) \
+    .withColumn("season_year", F.col("season_year").cast(IntegerType())) \
+    .withColumn("win_margin", F.col("win_margin").cast(IntegerType())) \
+    .withColumn("country_id", F.col("country_id").cast(IntegerType()))
 
 # COMMAND ----------
 
@@ -108,9 +106,9 @@ player_df_raw.printSchema()
 # COMMAND ----------
 
 player_df = player_df_raw \
-    .withColumn("player_sk", col("player_sk").cast(IntegerType())) \
-    .withColumn("player_id", col("player_id").cast(IntegerType())) \
-    .withColumn("dob", to_date("dob", "M/d/yyyy"))
+    .withColumn("player_sk", F.col("player_sk").cast(IntegerType())) \
+    .withColumn("player_id", F.col("player_id").cast(IntegerType())) \
+    .withColumn("dob", F.to_date("dob", "M/d/yyyy"))
 
 # COMMAND ----------
 
@@ -124,15 +122,15 @@ player_match_df_raw.printSchema()
 # COMMAND ----------
 
 player_match_df = player_match_df_raw \
-    .withColumn("player_match_sk", col("player_match_sk").cast(IntegerType())) \
-    .withColumn("playermatch_key", col("playermatch_key").cast(DecimalType())) \
-    .withColumn("match_id", col("match_id").cast(IntegerType())) \
-    .withColumn("player_id", col("player_id").cast(IntegerType())) \
-    .withColumn("dob", to_date("dob","M/d/yyyy")) \
-    .withColumn("season_year", col("season_year").cast(IntegerType())) \
-    .withColumn("age_as_on_match", col("age_as_on_match").cast(IntegerType())) \
-    .withColumn("is_manofthematch", col("is_manofthematch").cast(BooleanType())) \
-    .withColumn("isplayers_team_won", col("isplayers_team_won").cast(BooleanType())) 
+    .withColumn("player_match_sk", F.col("player_match_sk").cast(IntegerType())) \
+    .withColumn("playermatch_key", F.col("playermatch_key").cast(DecimalType())) \
+    .withColumn("match_id", F.col("match_id").cast(IntegerType())) \
+    .withColumn("player_id", F.col("player_id").cast(IntegerType())) \
+    .withColumn("dob", F.to_date("dob","M/d/yyyy")) \
+    .withColumn("season_year", F.col("season_year").cast(IntegerType())) \
+    .withColumn("age_as_on_match", F.col("age_as_on_match").cast(IntegerType())) \
+    .withColumn("is_manofthematch", F.col("is_manofthematch").cast(BooleanType())) \
+    .withColumn("isplayers_team_won", F.col("isplayers_team_won").cast(BooleanType())) 
 
 
 # COMMAND ----------
@@ -147,8 +145,8 @@ team_df_raw.printSchema()
 # COMMAND ----------
 
 team_df = team_df_raw \
-    .withColumn("team_sk", col("team_sk").cast(IntegerType())) \
-    .withColumn("team_id", col("team_id").cast(IntegerType()))
+    .withColumn("team_sk", F.col("team_sk").cast(IntegerType())) \
+    .withColumn("team_id", F.col("team_id").cast(IntegerType()))
 
 # COMMAND ----------
 
@@ -160,7 +158,8 @@ team_df.show(5)
 
 joined_df = ball_by_ball_df.join(team_df, ball_by_ball_df["team_bowling"] == team_df["team_id"], "inner")
 grouped_df = joined_df.groupBy("team_name", "season").sum("bowler_extras").withColumnRenamed("sum(bowler_extras)", "total_bowler_extras")
-sorted_df = grouped_df.orderBy(grouped_df.season.asc(), grouped_df.total_bowler_extras.desc()).show()
+sorted_df = grouped_df.orderBy(grouped_df.season.asc(), grouped_df.total_bowler_extras.desc())
+bowler_extras_df = sorted_df.show()
 
 
 # COMMAND ----------
@@ -169,7 +168,9 @@ sorted_df = grouped_df.orderBy(grouped_df.season.asc(), grouped_df.total_bowler_
 
 joined_df = ball_by_ball_df.join(team_df, ball_by_ball_df["team_batting"] == team_df["team_id"], "inner")
 grouped_df = joined_df.groupBy("team_name", "season").sum("extra_runs").withColumnRenamed("sum(extra_runs)", "total_extra_runs")
-sorted_df = grouped_df.orderBy(grouped_df.season.asc(), grouped_df.total_extra_runs.desc()).show()
+sorted_df = grouped_df.orderBy(grouped_df.season.asc(), grouped_df.total_extra_runs.desc())
+team_extras_df = sorted_df.show()
+
 
 # COMMAND ----------
 
@@ -179,20 +180,366 @@ grouped_df = ball_by_ball_df.groupBy("bowler", "season").sum("bowler_extras").wi
 joined_df = grouped_df.join(player_df, grouped_df["bowler"] == player_df["player_id"], "inner")
 select_df = joined_df.select("player_name", "country_name", "season", "total_bowler_extras")
 window_spec = Window.partitionBy("season").orderBy(select_df.total_bowler_extras.desc())
-ranked_df = select_df.withColumn("rank", row_number().over(window_spec))
+ranked_df = select_df.withColumn("rank", F.row_number().over(window_spec))
 top_bowlers_df = ranked_df.filter(ranked_df.rank <= 5).show()
-
-
 
 # COMMAND ----------
 
 # No of sixes by top 5 batters each season
 
-filter_sixes_df = ball_by_ball_df.filter(col("runs_scored") == 6)
+filter_sixes_df = ball_by_ball_df.filter(F.col("runs_scored") == 6)
 grouped_df = filter_sixes_df.groupBy("striker", "season").count().withColumnRenamed("count", "total_sixes")
 joined_df = grouped_df.join(player_df, grouped_df["striker"] == player_df["player_id"] , "inner")
 select_df = joined_df.select("player_name", "country_name", "season", "total_sixes")
 window_spec = Window.partitionBy("season").orderBy(select_df.total_sixes.desc())
-ranked_df = select_df.withColumn("rank", row_number().over(window_spec))
-top_batters = ranked_df.filter(ranked_df.rank <= 5).show()
+ranked_df = select_df.withColumn("rank", F.row_number().over(window_spec))
+top_batters_df = ranked_df.filter(ranked_df.rank <= 5)
 
+
+# COMMAND ----------
+
+# Determine which players have the best batting averages over the years.
+
+# Step 1: Calculate Total Outs by Each Player in Each Season
+# Filter for deliveries that resulted in an out, group by player and season, and count the total outs.
+player_outs_per_season_df = ball_by_ball_df.select("striker", "season") \
+    .where(F.col("bowler_wicket") == 'true') \
+    .groupBy("striker", "season") \
+    .agg(F.count("striker").alias("total_outs"))
+
+# Step 2: Calculate Total Runs Scored by Each Player in Each Season
+# Group by player and season, and sum the runs scored.
+player_runs_per_season_df = ball_by_ball_df.select("striker", "season", "runs_scored") \
+    .groupBy("striker", "season") \
+    .agg(F.sum("runs_scored").alias("total_runs"))
+
+# Step 3: Join Runs and Outs Data for Each Player per Season
+# Join the runs and outs data to have both total runs and outs for each player-season.
+seasonal_runs_outs_df = player_runs_per_season_df \
+    .join(player_outs_per_season_df, ["striker", "season"], "inner") \
+    .select("striker", "season", "total_runs", "total_outs")
+
+# Step 4: Define a Window Specification for Calculating Cumulative Sums per Player per Season
+# Partition by player to calculate cumulative statistics within each player group, ordered by season.
+player_season_window_spec = Window.partitionBy("striker").orderBy("season")
+
+# Step 5: Calculate Cumulative Runs, Outs, and Batting Average
+# Calculate cumulative totals and batting average for each player over the seasons.
+cumulative_runs_outs_df = seasonal_runs_outs_df \
+    .withColumn("cumulative_runs", F.sum("total_runs").over(player_season_window_spec)) \
+    .withColumn("cumulative_outs", F.sum("total_outs").over(player_season_window_spec)) \
+    .withColumn("cumulative_avg", F.round(F.col("cumulative_runs") / F.col("cumulative_outs"), 2))
+
+# Step 6: Join with Player Data to Include Detailed Player Information
+# Join the cumulative data with player information, including player name and country.
+player_cumulative_avg_df = cumulative_runs_outs_df \
+    .join(player_df, player_df["player_id"] == cumulative_runs_outs_df["striker"], "inner") \
+    .select("player_name", "country_name", "season", "cumulative_avg")
+
+# Step 7: Define Window Specification to Rank Players by Cumulative Average within Each Season
+# Partition by season and rank players by their cumulative batting average in descending order.
+season_rank_window_spec = Window.partitionBy("season").orderBy(F.desc("cumulative_avg"))
+
+# Step 8: Select Top 5 Batsmen by Cumulative Average for Each Season
+# Calculate ranks and filter for the top 5 players based on cumulative average in each season.
+top_5_batsmen_df = player_cumulative_avg_df \
+    .withColumn("rank", F.row_number().over(season_rank_window_spec)) \
+    .filter(F.col("rank") <= 5) \
+    .select("player_name", "country_name", "season", "cumulative_avg") \
+    .show()
+
+# Step 9: Select Top 5 Indian Batsmen by Cumulative Average for Each Season
+# Filter for Indian players, rank, and then select the top 5 in each season.
+top_5_indian_batsmen_df = player_cumulative_avg_df \
+    .filter(F.col("country_name") == 'India') \
+    .withColumn("rank", F.row_number().over(season_rank_window_spec)) \
+    .filter(F.col("rank") <= 5) \
+    .select("player_name", "country_name", "season", "cumulative_avg") \
+    .show()
+
+
+# COMMAND ----------
+
+# Analyze team performance when batting first versus chasing
+
+# Step 1: Select Relevant Columns for Analysis
+# Create a DataFrame with essential columns for determining match outcomes based on toss and innings choices.
+winning_teams_df = match_df \
+    .select("match_id", "season_year", "toss_winner", "match_winner", "toss_name")
+
+# Step 2: Filter and Aggregate Data for Teams Winning When Chasing
+# Filter for matches where the winning team chased. If the toss winner chose to bat but did not win, or if the toss winner
+# chose to field and won, then the team was chasing. Group by season and match winner to count wins while chasing.
+chasing_first_winning_teams_df = winning_teams_df \
+    .filter(
+        ((F.col("toss_winner") != F.col("match_winner")) & (F.col("toss_name") == 'bat')) |  # Toss winner batted, but lost
+        ((F.col("toss_winner") == F.col("match_winner")) & (F.col("toss_name") == 'field'))  # Toss winner fielded and won
+    ) \
+    .groupBy("season_year", "match_winner") \
+    .agg(F.count("*").alias("chasing_win_count")) \
+    .orderBy(F.col("season_year").asc(), F.col("chasing_win_count").desc()) \
+    .show()
+
+# Step 3: Filter and Aggregate Data for Teams Winning When Batting First
+# Filter for matches where the winning team batted first. If the toss winner chose to field but did not win, or if the toss 
+# winner chose to bat and won, then the team batted first. Group by season and match winner to count wins while batting first.
+batting_first_winning_teams_df = winning_teams_df \
+    .filter(
+        ((F.col("toss_winner") != F.col("match_winner")) & (F.col("toss_name") == 'field')) |  # Toss winner fielded, but lost
+        ((F.col("toss_winner") == F.col("match_winner")) & (F.col("toss_name") == 'bat'))      # Toss winner batted and won
+    ) \
+    .groupBy("season_year", "match_winner") \
+    .agg(F.count("*").alias("batting_win_count")) \
+    .orderBy(F.col("season_year").asc(), F.col("batting_win_count").desc()) \
+    .show()
+
+# COMMAND ----------
+
+# Analyze top bowlers based on the number of wickets taken each season
+
+# Step 1: Define Window Specification for Ranking Bowlers by Wickets within Each Season
+# Partition by season and order by the number of wickets taken in descending order.
+season_rank_window_spec = Window.partitionBy("season").orderBy(F.desc("wicket_taken_season_wise"))
+
+# Step 2: Calculate Total Wickets Taken by Each Bowler per Season
+# Filter for deliveries resulting in a wicket, group by season, team, and bowler, then count total wickets.
+bowler_wickets_df = ball_by_ball_df \
+    .filter(F.col("bowler_wicket") == 'true') \
+    .groupBy("season", "team_bowling", "bowler") \
+    .agg(F.count("*").alias("wicket_taken_season_wise")) \
+    .join(player_df, ball_by_ball_df["bowler"] == player_df["player_id"], "inner") \
+    .join(team_df, ball_by_ball_df["team_bowling"] == team_df["team_id"], "inner")
+
+# Step 3: Identify Top 5 Bowlers by Wickets Taken Each Season
+# Calculate the rank based on wickets taken and filter for the top 5 bowlers for each season.
+top_5_all_bowler_wickets_df = bowler_wickets_df \
+    .withColumn("rank", F.row_number().over(season_rank_window_spec)) \
+    .filter(F.col("rank") <= 5) \
+    .select("season", "player_name", "team_name", "country_name", "wicket_taken_season_wise") \
+    .show()
+
+# Step 4: Identify Top 5 Indian Bowlers by Wickets Taken Each Season
+# Filter for Indian bowlers, calculate the rank, and filter for the top 5 Indian bowlers by season.
+top_5_Indian_bowler_wickets_df = bowler_wickets_df \
+    .filter(F.col("country_name") == 'India') \
+    .withColumn("rank", F.row_number().over(season_rank_window_spec)) \
+    .filter(F.col("rank") <= 5) \
+    .select("season", "player_name", "team_name", "country_name", "wicket_taken_season_wise") \
+    .show()
+
+# COMMAND ----------
+
+# Analyze top bowlers based on their economy rate
+
+# Step 1: Calculate Runs per Ball for Each Bowler
+# Select relevant columns and calculate runs scored per ball, including extras.
+bowlers_economy_df = ball_by_ball_df \
+    .select("season", "bowler", "team_bowling", "runs_scored", "bowler_extras") \
+    .withColumn('runs_per_ball', F.col("runs_scored") + F.col("bowler_extras"))
+
+# Step 2: Calculate Overall Economy Rate for Each Bowler
+# Group by team and bowler, sum the runs per ball and count the number of balls bowled.
+top_bowlers_economy_all_time_df = bowlers_economy_df \
+    .groupBy("team_bowling" ,"bowler") \
+    .agg(F.sum("runs_per_ball").alias("sum_runs_per_ball"), F.count("*").alias("count_balls")) \
+    .filter(F.col("count_balls") >= 20) \
+    .withColumn('overs_bowled', F.round(( F.col("count_balls") / 6 ), 2)) \
+    .withColumn('bowler_economy', F.round(( F.col("sum_runs_per_ball") / F.col("overs_bowled") ), 2)) \
+    .join(player_df, ball_by_ball_df["bowler"] == player_df["player_id"], "inner") \
+    .join(team_df, ball_by_ball_df["team_bowling"] == team_df["team_id"], "inner") \
+    .select("team_name", "player_name", "country_name", "bowler_economy") \
+    .orderBy(F.col("bowler_economy").asc()).show()
+
+# Step 3: Define Window Specification for Ranking Bowlers by Economy within Each Season
+# Partition by season and order by economy rate in ascending order.
+season_wise_economy_window_spec = Window.partitionBy("season").orderBy(F.col("bowler_economy").asc())
+
+# Step 4: Calculate Economy Rate per Bowler for Each Season
+top_bowlers_economy_per_season_df = bowlers_economy_df \
+    .groupBy("season", "team_bowling" ,"bowler") \
+    .agg(F.sum("runs_per_ball").alias("sum_runs_per_ball"), F.count("*").alias("count_balls")) \
+    .filter(F.col("count_balls") >= 20) \
+    .withColumn('overs_bowled', F.round(( F.col("count_balls") / 6 ), 2)) \
+    .withColumn('bowler_economy', F.round(( F.col("sum_runs_per_ball") / F.col("overs_bowled") ), 2)) \
+    .join(player_df, ball_by_ball_df["bowler"] == player_df["player_id"], "inner") \
+    .join(team_df, ball_by_ball_df["team_bowling"] == team_df["team_id"], "inner") \
+    .orderBy(F.col("season"), F.col("bowler_economy").asc())
+
+# Step 5: Identify Top 5 Bowlers by Economy Rate for Each Season
+top_5_bowlers_economy_all_season_wise_df = top_bowlers_economy_per_season_df \
+    .withColumn("rank", F.row_number().over(season_wise_economy_window_spec)) \
+    .filter(F.col("rank") <= 5) \
+    .select("season", "team_name", "player_name", "country_name", "bowler_economy").show()
+
+# Step 6: Identify Top 5 Indian Bowlers by Economy Rate for Each Season
+top_5_bowlers_economy_indian_season_wise_df = top_bowlers_economy_per_season_df \
+    .filter(F.col("country_name") == 'India') \
+    .withColumn("rank", F.row_number().over(season_wise_economy_window_spec)) \
+    .filter(F.col("rank") <= 5) \
+    .select("season", "team_name", "player_name", "country_name", "bowler_economy").show()
+
+
+# COMMAND ----------
+
+# Analyze the most common types of dismissals in cricket
+
+# Step 1: Define Window Specification for Ranking Dismissal Types per Season
+# Partition by season and order by the number of wickets taken for each dismissal type in descending order.
+season_wise_out_type_order_window_spec = Window \
+    .partitionBy("season") \
+    .orderBy(F.desc("wicket_taken_season_out_type_wise"))
+
+# Step 2: Calculate the Count of Each Dismissal Type per Season
+# Filter for deliveries that resulted in a wicket, group by season and out type, then count occurrences.
+common_out_types_df = ball_by_ball_df \
+    .filter(F.col("bowler_wicket") == 'true') \
+    .groupBy("season", "out_type") \
+    .agg(F.count("*").alias("wicket_taken_season_out_type_wise")) \
+    .withColumn("rank", F.row_number().over(season_wise_out_type_order_window_spec)) \
+    .filter(F.col("rank") <= 5) \
+    .select("season", "out_type", "wicket_taken_season_out_type_wise") \
+    .show()
+
+# COMMAND ----------
+
+# Analyze which bowlers excel at specific dismissal types
+
+# Step 1: Define Window Specification for Ranking Bowlers by Dismissal Type per Season
+# Partition by season and out type, then order by season, out type, and the count of wickets taken in descending order.
+season_out_type_wise_window_spec = Window \
+    .partitionBy("season", "out_type") \
+    .orderBy(F.col("season").asc(), F.col("out_type").asc(), F.desc("wicket_taken_season_out_type_wise"))
+
+# Step 2: Calculate Wickets Taken by Each Bowler for Each Dismissal Type
+# Filter for deliveries that resulted in a wicket, group by season, team, bowler, and out type, then count occurrences.
+bowler_wickets_out_type_wise_df = ball_by_ball_df \
+    .filter(F.col("bowler_wicket") == 'true') \
+    .groupBy("season", "team_bowling" ,"bowler", "out_type") \
+    .agg(F.count("*").alias("wicket_taken_season_out_type_wise")) \
+    .join(player_df, ball_by_ball_df["bowler"] == player_df["player_id"], "inner") \
+    .join(team_df, ball_by_ball_df["team_bowling"] == team_df["team_id"], "inner") 
+
+# Step 3: Identify Top 5 Bowlers by Dismissal Type for All Players
+top_5_all_bowlers_out_type_df = bowler_wickets_out_type_wise_df \
+    .withColumn("rank", F.row_number().over(season_out_type_wise_window_spec)) \
+    .filter(F.col("rank") <= 5) \
+    .select("season", "player_name", "team_name", "country_name", "out_type", "wicket_taken_season_out_type_wise") \
+    .show()
+
+# Step 4: Display Results for Top 5 Bowlers by Dismissal Type for All Players
+top_5_Indian_bowler_out_type_df = bowler_wickets_out_type_wise_df \
+    .filter(F.col("country_name") == 'India') \
+    .withColumn("rank", F.row_number().over(season_out_type_wise_window_spec)) \
+    .filter(F.col("rank") <= 5) \
+    .select("season", "player_name", "team_name", "country_name", "out_type", "wicket_taken_season_out_type_wise") \
+    .show()
+
+# COMMAND ----------
+
+# Analyze how a team's toss decision (bat or field) impacts match outcomes
+
+# Step 1: Select Relevant Columns and Filter for Winning Teams Based on Toss Decision
+toss_outcome_df = match_df \
+    .select("season_year", "toss_winner", "match_winner", "toss_name") \
+    .filter(F.col("toss_winner") == F.col("match_winner")) \
+    .withColumnRenamed("season_year","season") \
+    .withColumnRenamed("toss_winner","team_name") \
+
+# Step 2: Calculate Wins for Teams that Elected to Field
+winning_teams_by_fielding_df = toss_outcome_df \
+    .filter(F.col("toss_name") == "field") \
+    .groupBy("season", "team_name") \
+    .agg(F.count("*").alias("match_wins_by_fielding")) \
+    .withColumnRenamed("season", "field_season") \
+    .withColumnRenamed("team_name", "field_team_name")
+
+# Step 3: Calculate Wins for Teams that Elected to Bat
+winning_teams_by_batting_df = toss_outcome_df \
+    .filter(F.col("toss_name") == "bat") \
+    .groupBy("season", "team_name") \
+    .agg(F.count("*").alias("match_wins_by_batting")) \
+    .withColumnRenamed("season", "bat_season") \
+    .withColumnRenamed("team_name", "bat_team_name")
+
+# Step 4: Join Fielding and Batting Win Dataframes to Analyze Toss Impact
+teams_toss_effect_on_type = winning_teams_by_fielding_df \
+    .join(
+        winning_teams_by_batting_df, 
+        (winning_teams_by_fielding_df["field_season"] == winning_teams_by_batting_df["bat_season"]) & 
+        (winning_teams_by_fielding_df["field_team_name"] == winning_teams_by_batting_df["bat_team_name"]), 
+        "inner"
+    ) \
+    .withColumn("total_wins", F.col("match_wins_by_fielding") + F.col("match_wins_by_batting")) \
+    .withColumn("win_percentage_field", F.round(F.col("match_wins_by_fielding") / F.col("total_wins") * 100)) \
+    .withColumn("win_percentage_bat", 100 - F.col("win_percentage_field")) \
+    .select(
+        winning_teams_by_batting_df["bat_season"].alias("season"), 
+        winning_teams_by_batting_df["bat_team_name"].alias("team_name"), 
+        "win_percentage_field",
+        "win_percentage_bat"
+    ) \
+    .orderBy(F.col("season").desc())
+
+# Step 5: Analyze Teams Winning by Fielding
+teams_winning_by_fielding = teams_toss_effect_on_type \
+    .select(
+        "season", 
+        "team_name", 
+        "win_percentage_field"
+    ) \
+    .orderBy(F.col("win_percentage_field").desc()).show()
+
+
+# Step 6: Analyze Teams Winning by Batting
+teams_winning_by_batting = teams_toss_effect_on_type \
+    .select(
+        "season", 
+        "team_name", 
+        "win_percentage_bat"
+    ) \
+    .orderBy(F.col("win_percentage_bat").desc()).show()
+
+# COMMAND ----------
+
+# Analyze which teams consistently perform well across seasons
+
+# Step 1: Count occurrences where the team is team1
+team1_count_df = match_df.groupBy("season_year", "team1") \
+    .agg(F.count("*").alias("team1_count")) \
+    .withColumnRenamed("team1", "team_name")
+
+# Step 2: Count occurrences where the team is team2
+team2_count_df = match_df.groupBy("season_year", "team2") \
+    .agg(F.count("*").alias("team2_count")) \
+    .withColumnRenamed("team2", "team_name")
+
+# Step 3: Count winning occurrences for each team
+winning_team_count = match_df.groupBy("season_year", "match_winner") \
+    .agg(F.count("*").alias("match_win_count")) \
+    .withColumnRenamed("match_winner", "team_name")
+
+# Step 4: Define a window specification for ranking teams based on winning percentage
+season_year_wise_window_spec = Window \
+    .partitionBy("season_year") \
+    .orderBy(F.col("winning_percentage").desc())
+
+# Step 5: Merge counts to get total matches played by each team in each season
+total_matches_df = team1_count_df.join(
+    team2_count_df,
+    on=["season_year", "team_name"],
+    how="outer"
+).join(
+    winning_team_count, 
+    on=["season_year", "team_name"],
+    how="outer"
+) \
+.fillna(0, ["team1_count", "team2_count"]) \
+.withColumn("total_matches", F.col("team1_count") + F.col("team2_count")) \
+.withColumn("winning_percentage", F.round((F.col("match_win_count")/F.col("total_matches")*100), 2) ) \
+.withColumn("rank", F.row_number().over(season_year_wise_window_spec)) \
+.filter(F.col("rank") <= 3) \
+.select("season_year", "team_name", "total_matches", "match_win_count", "winning_percentage")
+
+
+# Step 6: Display the results
+total_matches_df.orderBy("season_year", F.col("winning_percentage").desc()).show()
